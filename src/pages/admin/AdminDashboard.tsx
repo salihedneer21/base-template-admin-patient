@@ -9,10 +9,10 @@ import type { Id } from "../../../convex/_generated/dataModel";
 
 export default function AdminDashboard() {
   const { user } = useCurrentUser();
-  const allUsers = useQuery(api.users.listAll);
-  const updateRole = useMutation(api.users.updateRole);
-  const toggleActive = useMutation(api.users.toggleActive);
-  const deleteUser = useMutation(api.users.deleteUser);
+  const allUsers = useQuery(api.admin.users.listAll);
+  const updateRole = useMutation(api.admin.users.updateRole);
+  const toggleActive = useMutation(api.admin.users.toggleActive);
+  const deleteUser = useMutation(api.admin.users.deleteUser);
   const [loadingUserId, setLoadingUserId] = useState<string | null>(null);
 
   const adminCount = allUsers?.filter((u) => u.role === "admin").length || 0;
@@ -25,7 +25,7 @@ export default function AdminDashboard() {
       const newRole = currentRole === "admin" ? "patient" : "admin";
       await updateRole({ userId, role: newRole as "admin" | "patient" });
       toast.success(`User role updated to ${newRole}`);
-    } catch (error) {
+    } catch {
       toast.error("Failed to update role");
     } finally {
       setLoadingUserId(null);
@@ -37,7 +37,7 @@ export default function AdminDashboard() {
     try {
       await toggleActive({ userId });
       toast.success("User status updated");
-    } catch (error) {
+    } catch {
       toast.error("Failed to update status");
     } finally {
       setLoadingUserId(null);
@@ -52,7 +52,7 @@ export default function AdminDashboard() {
     try {
       await deleteUser({ userId });
       toast.success("User deleted");
-    } catch (error) {
+    } catch {
       toast.error("Failed to delete user");
     } finally {
       setLoadingUserId(null);
@@ -71,7 +71,7 @@ export default function AdminDashboard() {
         </div>
 
         {/* Stats Cards */}
-        <div className="grid gap-4 md:grid-cols-3 mb-8">
+        <div className="grid gap-4 md:grid-cols-4 mb-8">
           <div className="rounded-lg border border-border bg-card p-6 shadow-sm">
             <div className="flex items-center gap-4">
               <div className="p-3 rounded-full bg-primary/10 text-primary">
@@ -92,6 +92,18 @@ export default function AdminDashboard() {
               <div>
                 <p className="text-sm text-muted-foreground">Admins</p>
                 <p className="text-2xl font-semibold">{adminCount}</p>
+              </div>
+            </div>
+          </div>
+
+          <div className="rounded-lg border border-border bg-card p-6 shadow-sm">
+            <div className="flex items-center gap-4">
+              <div className="p-3 rounded-full bg-purple-100 text-purple-600">
+                <User className="w-6 h-6" />
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground">Patients</p>
+                <p className="text-2xl font-semibold">{patientCount}</p>
               </div>
             </div>
           </div>

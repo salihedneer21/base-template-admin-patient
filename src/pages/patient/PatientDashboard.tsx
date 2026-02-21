@@ -12,11 +12,11 @@ import type { Id } from "../../../convex/_generated/dataModel";
 export default function PatientDashboard() {
   const { user } = useCurrentUser();
   const patientProfile = useQuery(
-    api.patientProfiles.getByUserId,
+    api.patient.profiles.getByUserId,
     user?._id ? { userId: user._id as Id<"users"> } : "skip"
   );
-  const createProfile = useMutation(api.patientProfiles.create);
-  const updateProfile = useMutation(api.patientProfiles.update);
+  const createProfile = useMutation(api.patient.profiles.create);
+  const updateProfile = useMutation(api.patient.profiles.update);
 
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
@@ -96,7 +96,7 @@ export default function PatientDashboard() {
         toast.success("Profile created successfully");
       }
       setIsEditing(false);
-    } catch (error) {
+    } catch {
       toast.error("Failed to save profile");
     } finally {
       setIsSaving(false);

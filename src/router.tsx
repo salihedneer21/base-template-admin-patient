@@ -4,13 +4,12 @@ import Home from "./pages/Home";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import ForgotPassword from "./pages/auth/ForgotPassword";
-import SelectRole from "./pages/auth/SelectRole";
 import AccountInactive from "./pages/auth/AccountInactive";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import PatientDashboard from "./pages/patient/PatientDashboard";
 import ErrorPage from "./pages/Error";
-import ProtectedRoute from "./components/auth/ProtectedRoute";
 import GuestRoute from "./components/auth/GuestRoute";
+import AuthenticatedRoute from "./components/auth/AuthenticatedRoute";
 import AdminRoute from "./components/auth/AdminRoute";
 import PatientRoute from "./components/auth/PatientRoute";
 
@@ -41,14 +40,10 @@ export const router = createBrowserRouter([
           },
         ],
       },
-      // Protected routes (any authenticated user)
+      // Authenticated routes (any authenticated user, even inactive)
       {
-        element: <ProtectedRoute />,
+        element: <AuthenticatedRoute />,
         children: [
-          {
-            path: "/select-role",
-            element: <SelectRole />,
-          },
           {
             path: "/account-inactive",
             element: <AccountInactive />,

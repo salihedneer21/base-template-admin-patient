@@ -1,5 +1,5 @@
 import { v } from "convex/values";
-import { query, mutation } from "./_generated/server";
+import { query, mutation } from "../_generated/server";
 
 const genderValidator = v.union(
   v.literal("male"),

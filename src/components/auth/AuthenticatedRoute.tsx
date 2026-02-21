@@ -1,9 +1,11 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { useConvexAuth } from "convex/react";
 import FullPageSpinner from "@/components/ui/FullPageSpinner";
+import { useConvexAuth } from "convex/react";
 import { useAuthHydration } from "@/lib/auth-hydration";
 
-export default function GuestRoute() {
+// Simple auth check - only requires authentication, doesn't check active status
+// Used for pages like /account-inactive that inactive users need to access
+export default function AuthenticatedRoute() {
   const { isLoading, isAuthenticated } = useConvexAuth();
   const showLoader = useAuthHydration(isLoading);
 
@@ -11,9 +13,8 @@ export default function GuestRoute() {
     return <FullPageSpinner />;
   }
 
-  // Authenticated users go to home - they'll be redirected to their dashboard
-  if (isAuthenticated) {
-    return <Navigate to="/" replace />;
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
   }
 
   return <Outlet />;

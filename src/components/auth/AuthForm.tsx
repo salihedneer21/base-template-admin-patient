@@ -62,12 +62,12 @@ export default function AuthForm({
         }
 
         toast.success("Account created!");
-        navigate("/dashboard", { replace: true });
+        navigate("/", { replace: true });
       } else {
         const { error } = await authClient.signIn.email({
           email,
           password,
-          callbackURL: "/dashboard",
+          callbackURL: "/",
         });
 
         if (error) {

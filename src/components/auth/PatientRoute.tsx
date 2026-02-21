@@ -17,24 +17,19 @@ export default function PatientRoute() {
     return <Navigate to="/login" replace />;
   }
 
-  // User not yet created in our system - redirect to role selection
-  if (user === null) {
-    return <Navigate to="/select-role" replace />;
-  }
-
-  // Still loading user data
-  if (user === undefined) {
+  // Still loading user data (user being auto-created)
+  if (user === undefined || user === null) {
     return <FullPageSpinner />;
-  }
-
-  // Not a patient - redirect to admin dashboard
-  if (user.role !== "patient") {
-    return <Navigate to="/admin" replace />;
   }
 
   // Check if user is active
   if (!user.isActive) {
     return <Navigate to="/account-inactive" replace />;
+  }
+
+  // Not a patient - redirect to admin dashboard
+  if (user.role !== "patient") {
+    return <Navigate to="/admin" replace />;
   }
 
   return <Outlet />;

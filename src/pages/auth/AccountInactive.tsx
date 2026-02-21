@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { authClient } from "@/lib/auth-client";
 import { Button } from "@/components/ui/button";
-import { UserX } from "lucide-react";
+import { ShieldX, Mail, LogOut } from "lucide-react";
 
 export default function AccountInactive() {
   const navigate = useNavigate();
@@ -12,25 +12,40 @@ export default function AccountInactive() {
   };
 
   return (
-    <div className="flex flex-1 items-center justify-center p-4">
-      <div className="w-full max-w-md rounded-lg bg-white p-8 shadow-sm text-center">
-        <div className="mb-6">
-          <div className="mx-auto w-16 h-16 rounded-full bg-red-100 flex items-center justify-center">
-            <UserX className="w-8 h-8 text-red-600" />
+    <div className="flex flex-1 items-center justify-center">
+      <div className="mx-auto flex w-full max-w-lg flex-col items-center px-4 py-20 text-center">
+        <div className="mb-8">
+          <div className="mx-auto w-20 h-20 rounded-full bg-red-100 flex items-center justify-center">
+            <ShieldX className="w-10 h-10 text-red-600" />
           </div>
         </div>
 
-        <h1 className="font-heading text-2xl font-semibold mb-2">
+        <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
           Account Inactive
         </h1>
-        <p className="text-muted-foreground mb-6">
+        <p className="mt-4 text-lg text-muted-foreground max-w-md">
           Your account has been deactivated. Please contact an administrator to
           reactivate your account.
         </p>
 
-        <Button onClick={handleSignOut} variant="outline" className="w-full">
-          Sign out
-        </Button>
+        <div className="mt-10 w-full max-w-sm">
+          <div className="rounded-lg border border-border bg-card p-6 shadow-sm">
+            <div className="flex items-center gap-3 mb-4">
+              <div className="p-2 rounded-full bg-blue-100 text-blue-600">
+                <Mail className="w-5 h-5" />
+              </div>
+              <h3 className="font-semibold">Need Help?</h3>
+            </div>
+            <p className="text-sm text-muted-foreground text-left mb-4">
+              If you believe this is a mistake or need assistance, please reach
+              out to the system administrator.
+            </p>
+            <Button onClick={handleSignOut} variant="outline" className="w-full">
+              <LogOut className="w-4 h-4 mr-2" />
+              Sign out
+            </Button>
+          </div>
+        </div>
       </div>
     </div>
   );
