@@ -19,6 +19,9 @@ npx convex env set SITE_URL "http://localhost:5173"
 
 # 4. Create admin account
 npx convex run seed/admin:seedAdmin
+
+# 5. Frontend
+pnpm dev:vite     # Start Vite only
 ```
 
 Admin credentials: `admin1@gmail.com` / `adminadmin`
