@@ -85,16 +85,6 @@ export const deleteUser = mutation({
   args: { userId: v.id("users") },
   returns: v.null(),
   handler: async (ctx, args) => {
-    // Delete associated patient profile if exists
-    const patientProfile = await ctx.db
-      .query("patientProfiles")
-      .withIndex("by_userId", (q) => q.eq("userId", args.userId))
-      .unique();
-
-    if (patientProfile) {
-      await ctx.db.delete(patientProfile._id);
-    }
-
     await ctx.db.delete(args.userId);
     return null;
   },
