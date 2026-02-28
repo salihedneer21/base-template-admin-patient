@@ -402,7 +402,7 @@ Defined in `src/router.tsx`:
 | `Header`               | Main navigation header with dashboard link, user avatar, dropdown menu, and sign-out |
 | `AuthHeader`           | Minimal header (logo only) used on auth pages                        |
 | `Footer`               | Site footer with branding                                            |
-| `HIPAABanner`          | Dismissable HIPAA compliance warning banner                          |
+| `HIPAABanner`          | Configurable HIPAA compliance warning banner (controlled via env var) |
 | `SpecodeIframeTracker` | Tracks iframe embedding for Specode platform integration             |
 
 #### UI Components (`src/components/ui/`)
